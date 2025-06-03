@@ -9,14 +9,14 @@ commit_message=$(cat "$commit_message_file")
 # 허용된 커밋 타입 목록
 allowed_types="feat|fix|docs|refactor|style|design|chore|ci|perf|revert|remove|add"
 
-# 커밋 메시지 패턴
-pattern="^(${allowed_types}) *: *\[#([0-9]+)\] .+"
+# ✅ 커밋 메시지 패턴: 이슈 번호는 선택 사항
+pattern="^(${allowed_types}) *: *(.+)"
 
 # 커밋 메시지 검증
 if ! echo "$commit_message" | grep -Eiq "$pattern"; then
   echo "🚨 커밋 메시지 형식이 잘못되었습니다."
-  echo "올바른 형식: type: [#issue_num] commit_message"
-  echo "예: feat: [#1] 로그인 페이지 UI 구현"
+  echo "올바른 형식: type: commit_message"
+  echo "예: feat: 로그인 페이지 UI 구현"
   echo "가능한 type: ${allowed_types}"
   exit 1
 fi
